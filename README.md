@@ -11,8 +11,13 @@ They handle:
 - Git config + global ignore
 - macOS defaults (key repeat, tap-to-click, .DS_Store behavior, etc.)
 - SSH key helper
+- Update helper (`update.sh`) for brew/npm refresh
+- Project helper (`bin/mkproj`) for new repos under `~/projects`
+- Agent guide (`AGENTS.md`) for Codex/LLM contributors
 - Optional update helper (`update.sh`) for brew/npm refresh
 - Agent guide (`AGENTS.md`) for Codex/LLM contributors
+
+When adding new apps/CLI tools, prefer updating `Brewfile` (cask/formula) and installing via `brew bundle --file Brewfile --no-lock` or `./update.sh` so future machines stay in sync. See `CONTRIBUTING.md` for a quick checklist.
 
 ---
 
