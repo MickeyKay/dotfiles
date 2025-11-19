@@ -1,0 +1,52 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+PROJECTS_DIR="${HOME}/projects"
+
+info() {
+  printf "[mkproj] %s\n" "$1"
+}
+
+usage() {
+  echo "Usage: mkproj <name>"
+  exit 1
+}
+
+main() {
+  local name="${1-}"
+
+  if [ -z "${name}" ]; then
+    usage
+  fi
+
+  mkdir -p "${PROJECTS_DIR}"
+
+  local target="${PROJECTS_DIR}/${name}"
+  if [ -d "${target}" ]; then
+    info "Project directory already exists: ${target}"
+  else
+    mkdir -p "${target}"
+    info "Created ${target}"
+  fi
+
+  read -r -p "Initialize a git repo in ${target}? [y/N] " reply
+  case "${reply}" in
+    [yY][eE][sS]|[yY])
+      if ! command -v git >/dev/null 2>&1; then
+        info "git not found; skipping init."
+      else
+        GIT_DIR="${target}/.git"
+        if [ -d "${GIT_DIR}" ]; then
+          info "Git repo already exists. Skipping init."
+        else
+          (cd "${target}" && git init && info "Initialized git repo.")
+        fi
+      fi
+      ;;
+    *)
+      info "Skipped git init."
+      ;;
+  esac
+}
+
+main "$@"

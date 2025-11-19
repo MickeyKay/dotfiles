@@ -9,8 +9,10 @@ They handle:
 - zsh + oh-my-zsh (with git plugin)
 - Node via nvm (LTS) + pnpm + vercel CLI
 - Git config + global ignore
-- macOS defaults (key repeat, .DS_Store behavior, etc.)
+- macOS defaults (key repeat, tap-to-click, .DS_Store behavior, etc.)
 - SSH key helper
+- Optional update helper (`update.sh`) for brew/npm refresh
+- Agent guide (`AGENTS.md`) for Codex/LLM contributors
 
 ---
 
@@ -43,6 +45,12 @@ Then:
 ```bash
 # Generate and register SSH key (GitHub, etc.)
 ~/.dotfiles/bin/setup_ssh.sh your-email@example.com
+
+# Create a new project folder
+~/.dotfiles/bin/mkproj my-new-app
+
+# Update brew/npm and (optionally) macOS updates
+./update.sh
 ```
 
 Open a new terminal window (or `source ~/.zshrc`) and you should be in your new environment.
@@ -66,6 +74,7 @@ Open a new terminal window (or `source ~/.zshrc`) and you should be in your new 
   - `~/.gitconfig` → `git/gitconfig`
   - `~/.gitignore_global` → `git/gitignore_global`
 - **macOS defaults** – a few opinionated system tweaks
+- **Update helper** – `update.sh` for brew/npm refresh and optional macOS updates
 
 ---
 
@@ -106,6 +115,10 @@ These are things I still do manually. Documenting them here so future-me remembe
 - Dock layout
 - Trackpad gestures
 - Display / Night Shift specifics, etc.
+- Scroll direction (I prefer traditional / not "natural"):
+  `System Settings → Trackpad → Scroll & Zoom → Scroll direction: Natural` (turn this **off**)
+- iTerm2 new tabs reuse working dir:
+  `iTerm2 → Settings → Profiles → (profile) → General → Initial directory → Reuse previous session's directory`
 
 These can be added gradually to `macos.sh` if I decide they’re worth automating.
 
