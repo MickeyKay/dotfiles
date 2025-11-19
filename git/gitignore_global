@@ -1,0 +1,17 @@
+.DS_Store
+Thumbs.db
+
+node_modules
+dist
+.out
+build
+coverage
+
+.env
+.env.local
+.env.*.local
+.npmrc
+.yarnrc
+
+.idea/
+.vscode/

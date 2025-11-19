@@ -1,0 +1,23 @@
+# CLI tools
+brew "git"
+brew "nvm"
+brew "gh"
+brew "wget"
+brew "htop"
+brew "tree"
+brew "jq"
+brew "ripgrep"
+brew "fzf"
+
+# Apps
+cask "iterm2"
+cask "google-chrome"
+cask "alfred"
+cask "discord"
+cask "flux-app"
+cask "flycut"
+cask "gifox"
+cask "moom"
+cask "slack"
+cask "sublime-text"
+cask "transmit"

@@ -1,0 +1,16 @@
+[user]
+  name = MickeyKay
+  email = mickeyskay@gmail.com
+
+[core]
+  excludesfile = ~/.gitignore_global
+  editor = subl -w
+
+[init]
+  defaultBranch = main
+
+[push]
+  default = current
+
+[merge]
+  conflictstyle = zdiff3

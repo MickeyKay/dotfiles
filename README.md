@@ -1,0 +1,138 @@
+# Mickey's Dotfiles
+
+These dotfiles are meant to get me from a **fresh Mac** to a **fully usable dev machine** as quickly and repeatably as possible.
+
+They handle:
+
+- Homebrew + core CLI tools
+- App installs (Chrome, Alfred, Sublime, Slack, etc.)
+- zsh + oh-my-zsh (with git plugin)
+- Node via nvm (LTS) + pnpm + vercel CLI
+- Git config + global ignore
+- macOS defaults (key repeat, .DS_Store behavior, etc.)
+- SSH key helper
+
+---
+
+## Quick Start (New Machine)
+
+```bash
+# 1. Clone dotfiles
+git clone git@github.com:YOUR_GITHUB_USERNAME/dotfiles.git ~/.dotfiles
+cd ~/.dotfiles
+
+# 2. Make bootstrap executable
+chmod +x bootstrap.sh
+
+# 3. Run bootstrap
+./bootstrap.sh
+```
+
+This will:
+
+- Ensure Xcode Command Line Tools
+- Install Homebrew
+- Run the `Brewfile` (CLI tools + apps)
+- Install oh-my-zsh
+- Symlink zsh + git config files
+- Set default shell to zsh
+- Apply macOS defaults (via `macos.sh`)
+
+Then:
+
+```bash
+# Generate and register SSH key (GitHub, etc.)
+~/.dotfiles/bin/setup_ssh.sh your-email@example.com
+```
+
+Open a new terminal window (or `source ~/.zshrc`) and you should be in your new environment.
+
+---
+
+## What `bootstrap.sh` Handles
+
+- **Xcode CLI tools** – required for git, compilers, etc.
+- **Homebrew** – package manager for everything else
+- **Brewfile** – installs:
+  - CLI: git, nvm, gh, wget, jq, ripgrep, fzf, etc.
+  - GUI apps: iTerm2, Chrome, Alfred, Discord, Flux, Flycut, Gifox, Moom, Slack, Sublime Text, Transmit, Xcode
+- **oh-my-zsh** – shell framework + git plugin
+- **Node tooling**:
+  - nvm
+  - Node LTS
+  - global: `pnpm`, `vercel`
+- **Symlinks**:
+  - `~/.zshrc` → `zsh/zshrc`
+  - `~/.gitconfig` → `git/gitconfig`
+  - `~/.gitignore_global` → `git/gitignore_global`
+- **macOS defaults** – a few opinionated system tweaks
+
+---
+
+## Manual Setup Steps (Not Automated Yet)
+
+These are things I still do manually. Documenting them here so future-me remembers **what** and **why**.
+
+### 1. Install ChatGPT Desktop
+- **How**: Download from OpenAI’s site and install.
+- **Why**: Native app for faster access to ChatGPT; not managed via Homebrew (yet / by choice).
+
+### 2. Install Codex CLI
+- **How**: Follow the official Codex CLI installation instructions.
+- **Why**: Useful for command-line assistance / generation. Keeping it manual so it can evolve independently of dotfiles.
+
+### 3. Set Chrome as Default Browser
+- **How**:  
+  `System Settings → Desktop & Dock → Default web browser → Google Chrome`
+- **Why**: I prefer Chrome for dev + everyday browsing. This setting tends to be a bit brittle to script, so I configure it once per machine.
+
+### 4. Sign In to Core Accounts
+- **How**:
+  - Chrome (profile sync: bookmarks, extensions)
+  - GitHub (web + `gh auth login`)
+  - Vercel (`vercel login`)
+  - Slack workspaces
+- **Why**: Restores all the cloud-side state (bookmarks, repos, projects, etc.) that dotfiles intentionally don’t manage.
+
+### 5. Restore App Licenses and Preferences
+- **Apps**:
+  - Alfred (PowerPack license + sync prefs if applicable)
+  - Moom
+  - Sublime Text
+  - Transmit (favorites can be restored from cloud / manual export if needed)
+- **Why**: License keys and some app-specific preferences are sensitive / personal; better restored from my password manager or manual backup than hard-coded.
+
+### 6. (Optional) Customize macOS Settings Beyond `macos.sh`
+- Dock layout
+- Trackpad gestures
+- Display / Night Shift specifics, etc.
+
+These can be added gradually to `macos.sh` if I decide they’re worth automating.
+
+---
+
+## Conventions
+
+- Primary code directory: `~/projects`
+- Shell: zsh + oh-my-zsh
+- Editor: Sublime Text (`subl -w`)
+- Node: nvm-managed, LTS as default
+- Git: `main` as default branch, global ignore file in `git/gitignore_global`
+
+---
+
+## Rerunning Bootstrap
+
+It should be generally safe to rerun:
+
+```bash
+cd ~/.dotfiles
+./bootstrap.sh
+```
+
+It will:
+
+- Skip installing things that already exist
+- Backup pre-existing config files to `*.backup` before relinking
+
+Use this when you add new tools to your `Brewfile` or adjust configuration.
