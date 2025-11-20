@@ -10,6 +10,7 @@ They handle:
 - Node via nvm (LTS) + pnpm + vercel CLI
 - Git config + global ignore
 - macOS defaults (key repeat, tap-to-click, .DS_Store behavior, etc.)
+  - Trackpad speed: adjust `com.apple.trackpad.scaling` / `com.apple.mouse.scaling` values in `macos.sh`
 - SSH key helper
 - Update helper (`update.sh`) for brew/npm refresh
 - Project helper (`bin/mkproj`) for new repos under `~/projects`
