@@ -22,3 +22,11 @@ fi
 [ -f "${DOTFILES_DIR}/zsh/aliases.zsh" ]   && source "${DOTFILES_DIR}/zsh/aliases.zsh"
 [ -f "${DOTFILES_DIR}/zsh/functions.zsh" ] && source "${DOTFILES_DIR}/zsh/functions.zsh"
 [ -f "${DOTFILES_DIR}/zsh/plugins.zsh" ]   && source "${DOTFILES_DIR}/zsh/plugins.zsh"
+
+# pnpm
+export PNPM_HOME="/Users/mickey/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
