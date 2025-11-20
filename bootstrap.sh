@@ -40,7 +40,7 @@ install_homebrew() {
 run_brewfile() {
   if [ -f "${DOTFILES_DIR}/Brewfile" ]; then
     info "Running Brewfile..."
-    brew bundle --file="${DOTFILES_DIR}/Brewfile" --no-lock
+    brew bundle --file="${DOTFILES_DIR}/Brewfile"
   else
     info "No Brewfile found, skipping."
   fi

@@ -96,12 +96,16 @@ These are things I still do manually. Documenting them here so future-me remembe
 - **How**: Follow the official Codex CLI installation instructions.
 - **Why**: Useful for command-line assistance / generation. Keeping it manual so it can evolve independently of dotfiles.
 
-### 3. Set Chrome as Default Browser
+### 3. Install Zoom
+- **How**: Download the latest Zoom client from zoom.us and install it manually.
+- **Why**: Prefer handling Zoom outside Homebrew to keep control over updates and permissions.
+
+### 4. Set Chrome as Default Browser
 - **How**:  
   `System Settings → Desktop & Dock → Default web browser → Google Chrome`
 - **Why**: I prefer Chrome for dev + everyday browsing. This setting tends to be a bit brittle to script, so I configure it once per machine.
 
-### 4. Sign In to Core Accounts
+### 5. Sign In to Core Accounts
 - **How**:
   - Chrome (profile sync: bookmarks, extensions)
   - GitHub (web + `gh auth login`)
@@ -109,7 +113,7 @@ These are things I still do manually. Documenting them here so future-me remembe
   - Slack workspaces
 - **Why**: Restores all the cloud-side state (bookmarks, repos, projects, etc.) that dotfiles intentionally don’t manage.
 
-### 5. Restore App Licenses and Preferences
+### 6. Restore App Licenses and Preferences
 - **Apps**:
   - Alfred (PowerPack license + sync prefs if applicable)
   - Moom
@@ -117,7 +121,7 @@ These are things I still do manually. Documenting them here so future-me remembe
   - Transmit (favorites can be restored from cloud / manual export if needed)
 - **Why**: License keys and some app-specific preferences are sensitive / personal; better restored from my password manager or manual backup than hard-coded.
 
-### 6. (Optional) Customize macOS Settings Beyond `macos.sh`
+### 7. (Optional) Customize macOS Settings Beyond `macos.sh`
 - Dock layout
 - Trackpad gestures
 - Display / Night Shift specifics, etc.
@@ -128,7 +132,7 @@ These are things I still do manually. Documenting them here so future-me remembe
 
 These can be added gradually to `macos.sh` if I decide they’re worth automating.
 
-### 7. Point iTerm2 at repo-managed preferences
+### 8. Point iTerm2 at repo-managed preferences
 - **How**: `iTerm2 → Settings → General → Preferences` → enable “Load preferences from a custom folder or URL” → set folder to `~/.dotfiles` (or wherever this repo lives). Restart iTerm2 to pick up `com.googlecode.iterm2.plist`.
 - **Why**: Keeps iTerm2 color/profile tweaks in sync without manually reapplying them on new machines.
 
