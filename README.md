@@ -128,6 +128,10 @@ These are things I still do manually. Documenting them here so future-me remembe
 
 These can be added gradually to `macos.sh` if I decide they’re worth automating.
 
+### 7. Point iTerm2 at repo-managed preferences
+- **How**: `iTerm2 → Settings → General → Preferences` → enable “Load preferences from a custom folder or URL” → set folder to `~/.dotfiles` (or wherever this repo lives). Restart iTerm2 to pick up `com.googlecode.iterm2.plist`.
+- **Why**: Keeps iTerm2 color/profile tweaks in sync without manually reapplying them on new machines.
+
 ---
 
 ## Conventions
