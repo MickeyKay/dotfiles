@@ -1,0 +1,63 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+REPO_URL="${SUBLIME_USER_REPO:-git@github.com:MickeyKay/Sublime-User-Package.git}"
+DEFAULT_PATH="${HOME}/Library/Application Support/Sublime Text/Packages/User"
+
+info() { printf "[sublime-sync] %s\n" "$1"; }
+warn() { printf "[sublime-sync] WARNING: %s\n" "$1" >&2; }
+
+choose_target_dir() {
+  if [ -n "${SUBLIME_USER_DIR:-}" ]; then
+    echo "${SUBLIME_USER_DIR}"
+    return
+  fi
+
+  echo "${DEFAULT_PATH}"
+}
+
+main() {
+  if ! command -v git >/dev/null 2>&1; then
+    warn "git not found; install git first."
+    exit 1
+  fi
+
+  local target
+  target="$(choose_target_dir)"
+  info "Using Sublime Text User directory: ${target}"
+
+  if [ -d "${target}/.git" ]; then
+    local origin
+    origin="$(git -C "${target}" remote get-url origin 2>/dev/null || true)"
+
+    if [ -n "${origin}" ] && [ "${origin}" != "${REPO_URL}" ]; then
+      warn "Origin remote (${origin}) differs from expected (${REPO_URL}). Set SUBLIME_USER_REPO or update the repo manually, then rerun."
+      exit 1
+    fi
+
+    if [ -n "$(git -C "${target}" status --porcelain --ignore-submodules=dirty)" ]; then
+      warn "Local changes detected in ${target}; commit/stash them before updating."
+      exit 1
+    fi
+
+    info "Pulling latest from ${REPO_URL}"
+    git -C "${target}" pull --ff-only
+    info "Done."
+    exit 0
+  fi
+
+  if [ -d "${target}" ]; then
+    if [ -n "$(ls -A "${target}" 2>/dev/null)" ]; then
+      warn "Target directory exists and is not a git repo. Move it aside (or set SUBLIME_USER_DIR) before syncing."
+      exit 1
+    fi
+    rmdir "${target}"
+  fi
+
+  mkdir -p "$(dirname "${target}")"
+  info "Cloning ${REPO_URL} into ${target}"
+  git clone "${REPO_URL}" "${target}"
+  info "Done."
+}
+
+main "$@"
