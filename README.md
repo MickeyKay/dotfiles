@@ -140,7 +140,11 @@ These can be added gradually to `macos.sh` if I decide they’re worth automatin
 - **How**: `iTerm2 → Settings → General → Preferences` → enable “Load preferences from a custom folder or URL” → set folder to `~/.dotfiles` (or wherever this repo lives). Restart iTerm2 to pick up `com.googlecode.iterm2.plist`.
 - **Why**: Keeps iTerm2 color/profile tweaks in sync without manually reapplying them on new machines.
 
-### 10. Sync Sublime Text User settings
+### 10. Install Sublime Text Package Control
+- **How**: Open Sublime Text → `Cmd+Shift+P` → “Install Package Control” (or `Tools → Install Package Control`), then restart Sublime Text once.
+- **Why**: Package Control is needed to restore packages from synced settings; installing it once ensures the user repo can pull in dependencies automatically.
+
+### 11. Sync Sublime Text User settings
 - **How**: Run `~/.dotfiles/bin/sync_sublime_user` to clone/pull `git@github.com:MickeyKay/Sublime-User-Package.git` into Sublime Text 4’s `Packages/User` directory. Override the target with `SUBLIME_USER_DIR`, or change the source with `SUBLIME_USER_REPO`.
 - **Why**: Keeps Sublime Text preferences in sync across machines without manual export/import. The helper is idempotent and refuses to overwrite non-git content or dirty working copies.
 
